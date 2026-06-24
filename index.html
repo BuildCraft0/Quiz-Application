@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuizMaster Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="theme-dark">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+
+    <div class="app-shell">
+      <header class="topbar glass-panel">
+        <div>
+          <p class="eyebrow">Modern Quiz Platform</p>
+          <h1>QuizMaster Pro</h1>
+        </div>
+        <div class="topbar-actions">
+          <div id="userBadge" class="user-badge hidden">
+            <span class="status-dot"></span>
+            <span id="activeUsername">Guest</span>
+          </div>
+          <button id="themeToggle" class="icon-button" type="button" aria-label="Toggle color mode">
+            <span id="themeToggleLabel">Light Mode</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section id="authSection" class="view">
+          <div class="split-layout">
+            <article class="hero-card glass-panel">
+              <p class="eyebrow">Adaptive Practice Experience</p>
+              <h2>Sharpen your skills with a quiz app that feels premium.</h2>
+              <p class="hero-copy">
+                Play across five categories, mix difficulty levels, use strategic lifelines,
+                track detailed analytics, and earn a certificate when you cross the mastery line.
+              </p>
+              <div class="feature-grid">
+                <div class="mini-card">
+                  <strong>Dynamic Engine</strong>
+                  <span>JSON-powered questions, shuffled sessions, no repeats.</span>
+                </div>
+                <div class="mini-card">
+                  <strong>Deep Insights</strong>
+                  <span>Charts, leaderboard tracking, score history, and review mode.</span>
+                </div>
+                <div class="mini-card">
+                  <strong>Built for Focus</strong>
+                  <span>Timer pressure, bookmarks, retries, and clean responsive layouts.</span>
+                </div>
+              </div>
+            </article>
+
+            <aside class="auth-card glass-panel">
+              <div class="card-header">
+                <p class="eyebrow">Login</p>
+                <h3>Start with your username</h3>
+              </div>
+              <form id="loginForm" class="stack-md">
+                <label class="field">
+                  <span>Username</span>
+                  <input
+                    id="usernameInput"
+                    type="text"
+                    name="username"
+                    maxlength="24"
+                    autocomplete="username"
+                    placeholder="Enter your username"
+                    required
+                  />
+                </label>
+                <button class="primary-button" type="submit">Enter QuizMaster Pro</button>
+              </form>
+
+              <div class="info-row">
+                <span class="info-chip">5 Categories</span>
+                <span class="info-chip">3 Difficulty Levels</span>
+                <span class="info-chip">Top 10 Leaderboard</span>
+              </div>
+
+              <div class="card-header compact">
+                <p class="eyebrow">Hall of Fame</p>
+                <h4>Top Players</h4>
+              </div>
+              <div id="publicLeaderboard" class="leaderboard-list"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="dashboardSection" class="view hidden">
+          <div class="dashboard-grid">
+            <aside class="sidebar stack-lg">
+              <article class="glass-panel profile-card">
+                <div class="card-header compact">
+                  <p class="eyebrow">Profile</p>
+                  <h3 id="profileName">Player</h3>
+                </div>
+                <div class="stat-pair-grid">
+                  <div class="metric-card">
+                    <span class="metric-label">Quizzes Taken</span>
+                    <strong id="profileQuizCount">0</strong>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Best Score</span>
+                    <strong id="profileBestScore">0</strong>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Avg. Accuracy</span>
+                    <strong id="profileAverageAccuracy">0%</strong>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-label">Bookmarks</span>
+                    <strong id="profileBookmarkCount">0</strong>
+                  </div>
+                </div>
+                <button id="logoutButton" class="ghost-button full-width" type="button">Log Out</button>
+              </article>
+
+              <article class="glass-panel">
+                <div class="card-header compact">
+                  <p class="eyebrow">Bookmarks</p>
+                  <h3>Saved Questions</h3>
+                </div>
+                <div id="bookmarksList" class="bookmark-list"></div>
+                <button id="practiceBookmarksButton" class="secondary-button full-width" type="button">
+                  Practice Bookmarked Questions
+                </button>
+              </article>
+
+              <article class="glass-panel">
+                <div class="card-header compact">
+                  <p class="eyebrow">Leaderboard</p>
+                  <h3>Top 10 Players</h3>
+                </div>
+                <div id="dashboardLeaderboard" class="leaderboard-list"></div>
+              </article>
+            </aside>
+
+            <section class="content-column stack-lg">
+              <article class="glass-panel welcome-banner">
+                <div>
+                  <p class="eyebrow">Command Center</p>
+                  <h2>Build your next challenge.</h2>
+                  <p>
+                    Combine categories, set difficulty, search the bank, and launch a quiz
+                    session that matches exactly what you want to practice.
+                  </p>
+                </div>
+                <div class="banner-stats">
+                  <div>
+                    <span>Loaded Questions</span>
+                    <strong id="loadedQuestionCount">0</strong>
+                  </div>
+                  <div>
+                    <span>Matching Filters</span>
+                    <strong id="matchingQuestionCount">0</strong>
+                  </div>
+                </div>
+              </article>
+
+              <div class="setup-grid">
+                <article class="glass-panel stack-lg">
+                  <div class="card-header compact">
+                    <p class="eyebrow">Quiz Setup</p>
+                    <h3>Session Filters</h3>
+                  </div>
+
+                  <div class="stack-md">
+                    <div>
+                      <label class="section-label">Categories</label>
+                      <div id="categoryFilters" class="chip-grid"></div>
+                    </div>
+
+                    <div>
+                      <label class="section-label">Difficulty Levels</label>
+                      <div id="difficultyFilters" class="chip-grid"></div>
+                    </div>
+
+                    <div class="form-grid">
+                      <label class="field">
+                        <span>Questions Per Quiz</span>
+                        <select id="questionCountSelect">
+                          <option value="5">5 Questions</option>
+                          <option value="10" selected>10 Questions</option>
+                          <option value="15">15 Questions</option>
+                        </select>
+                      </label>
+
+                      <label class="field">
+                        <span>Search Questions</span>
+                        <input
+                          id="questionSearchInput"
+                          type="search"
+                          placeholder="Search by keyword, topic, or concept"
+                        />
+                      </label>
+                    </div>
+
+                    <div class="info-row">
+                      <span class="info-chip" id="poolSummary">Ready to build a quiz.</span>
+                    </div>
+                  </div>
+
+                  <button id="startQuizButton" class="primary-button" type="button">Start Quiz</button>
+                </article>
+
+                <article class="glass-panel stack-lg">
+                  <div class="card-header compact">
+                    <p class="eyebrow">Question Explorer</p>
+                    <h3>Preview Matching Questions</h3>
+                  </div>
+                  <div id="searchResultsPreview" class="search-preview-list"></div>
+                </article>
+              </div>
+
+              <article class="glass-panel">
+                <div class="card-header compact">
+                  <p class="eyebrow">Recent Scores</p>
+                  <h3>Previous Attempts</h3>
+                </div>
+                <div id="recentScores" class="history-list"></div>
+              </article>
+            </section>
+          </div>
+        </section>
+
+        <section id="quizSection" class="view hidden">
+          <article class="glass-panel quiz-shell">
+            <div class="quiz-topbar">
+              <div>
+                <p class="eyebrow">Live Quiz</p>
+                <h2 id="quizSessionTitle">Custom Session</h2>
+              </div>
+              <div class="quiz-stats">
+                <div class="metric-card compact">
+                  <span class="metric-label">Score</span>
+                  <strong id="liveScore">0</strong>
+                </div>
+                <div class="metric-card compact">
+                  <span class="metric-label">Question</span>
+                  <strong id="questionPosition">1 / 10</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-block">
+              <div class="progress-row">
+                <span>Progress</span>
+                <span id="progressLabel">0%</span>
+              </div>
+              <div class="progress-track">
+                <div id="progressFill" class="progress-fill"></div>
+              </div>
+            </div>
+
+            <div class="quiz-grid">
+              <div class="timer-column">
+                <div id="timerRing" class="timer-ring" style="--timer-progress: 1">
+                  <div class="timer-ring-inner">
+                    <span class="timer-caption">Time Left</span>
+                    <strong id="timerValue">30s</strong>
+                  </div>
+                </div>
+
+                <div class="lifeline-panel">
+                  <p class="section-label">Lifelines</p>
+                  <button id="lifelineFifty" class="lifeline-button" type="button">50-50</button>
+                  <button id="lifelineSkip" class="lifeline-button" type="button">Skip Question</button>
+                  <button id="lifelineTime" class="lifeline-button" type="button">Extra Time</button>
+                </div>
+              </div>
+
+              <div class="question-column stack-lg">
+                <div class="question-meta">
+                  <span id="currentCategoryBadge" class="tag">Category</span>
+                  <span id="currentDifficultyBadge" class="tag secondary">Difficulty</span>
+                  <button id="bookmarkButton" class="ghost-button bookmark-button" type="button">
+                    Bookmark Question
+                  </button>
+                </div>
+
+                <div class="question-card">
+                  <h3 id="questionText">Question text will appear here.</h3>
+                  <div id="optionList" class="option-list"></div>
+                </div>
+
+                <div class="quiz-actions">
+                  <div id="feedbackBanner" class="feedback-banner hidden"></div>
+                  <button id="submitAnswerButton" class="primary-button" type="button" disabled>
+                    Submit Answer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section id="resultsSection" class="view hidden">
+          <div class="results-grid">
+            <article class="glass-panel stack-lg">
+              <div class="card-header">
+                <div>
+                  <p class="eyebrow">Results Dashboard</p>
+                  <h2 id="resultsHeadline">You finished the quiz.</h2>
+                </div>
+                <span id="resultsRating" class="rating-pill">Intermediate</span>
+              </div>
+
+              <div class="results-metric-grid">
+                <div class="metric-card">
+                  <span class="metric-label">Total Questions</span>
+                  <strong id="resultTotalQuestions">0</strong>
+                </div>
+                <div class="metric-card">
+                  <span class="metric-label">Correct Answers</span>
+                  <strong id="resultCorrectAnswers">0</strong>
+                </div>
+                <div class="metric-card">
+                  <span class="metric-label">Wrong Answers</span>
+                  <strong id="resultWrongAnswers">0</strong>
+                </div>
+                <div class="metric-card">
+                  <span class="metric-label">Accuracy</span>
+                  <strong id="resultAccuracy">0%</strong>
+                </div>
+                <div class="metric-card">
+                  <span class="metric-label">Final Score</span>
+                  <strong id="resultFinalScore">0</strong>
+                </div>
+                <div class="metric-card">
+                  <span class="metric-label">Time Taken</span>
+                  <strong id="resultTimeTaken">0s</strong>
+                </div>
+              </div>
+
+              <div class="results-actions">
+                <button id="backToDashboardButton" class="secondary-button" type="button">
+                  Back to Dashboard
+                </button>
+                <button id="retryIncorrectButton" class="ghost-button" type="button">
+                  Retry Incorrect Questions
+                </button>
+                <button id="downloadCertificateButton" class="primary-button" type="button">
+                  Download Certificate PDF
+                </button>
+              </div>
+            </article>
+
+            <article class="glass-panel stack-lg">
+              <div class="card-header compact">
+                <p class="eyebrow">Analytics</p>
+                <h3>Performance Insights</h3>
+              </div>
+              <div class="chart-grid">
+                <div class="chart-card">
+                  <canvas id="answersChart"></canvas>
+                </div>
+                <div class="chart-card">
+                  <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-card full-span">
+                  <canvas id="distributionChart"></canvas>
+                </div>
+              </div>
+            </article>
+
+            <article id="certificatePanel" class="glass-panel certificate-panel hidden">
+              <div class="certificate-card">
+                <p class="certificate-kicker">Completion Certificate</p>
+                <h3>QuizMaster Pro Achievement Award</h3>
+                <p>This certifies that</p>
+                <strong id="certificateUsername">Player</strong>
+                <p>
+                  completed a quiz session in
+                  <span id="certificateCategory">JavaScript</span>
+                  with a score of
+                  <span id="certificateScore">0</span>.
+                </p>
+                <p id="certificateDate">Date</p>
+              </div>
+            </article>
+
+            <article class="glass-panel stack-lg review-panel">
+              <div class="card-header compact">
+                <p class="eyebrow">Review Mode</p>
+                <h3>Question-by-Question Breakdown</h3>
+              </div>
+              <div id="reviewList" class="review-list"></div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

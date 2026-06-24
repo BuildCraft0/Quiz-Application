@@ -1,0 +1,504 @@
+{
+  "questions": [
+    {
+      "id": "js-easy-1",
+      "category": "JavaScript",
+      "difficulty": "Easy",
+      "question": "Which JavaScript keyword declares a block-scoped variable that can be reassigned?",
+      "options": ["var", "let", "const", "static"],
+      "answer": "let",
+      "explanation": "`let` creates a block-scoped binding and allows reassignment later."
+    },
+    {
+      "id": "js-easy-2",
+      "category": "JavaScript",
+      "difficulty": "Easy",
+      "question": "Which array method creates a new array by transforming every item in the original array?",
+      "options": ["forEach", "map", "filter", "reduce"],
+      "answer": "map",
+      "explanation": "`map()` returns a new array containing the transformed values for each element."
+    },
+    {
+      "id": "js-easy-3",
+      "category": "JavaScript",
+      "difficulty": "Easy",
+      "question": "Which built-in function converts a valid JSON string into a JavaScript object?",
+      "options": ["JSON.parse()", "JSON.stringify()", "Object.from()", "String.toObject()"],
+      "answer": "JSON.parse()",
+      "explanation": "`JSON.parse()` reads JSON text and returns the corresponding JavaScript value."
+    },
+    {
+      "id": "js-medium-1",
+      "category": "JavaScript",
+      "difficulty": "Medium",
+      "question": "What is a closure in JavaScript?",
+      "options": [
+        "A function bundled with references to its lexical environment",
+        "A special loop that closes open files",
+        "A syntax rule for ending statements with semicolons",
+        "A method used to cancel promises"
+      ],
+      "answer": "A function bundled with references to its lexical environment",
+      "explanation": "Closures let functions remember variables from the scope where they were created."
+    },
+    {
+      "id": "js-medium-2",
+      "category": "JavaScript",
+      "difficulty": "Medium",
+      "question": "Why is event delegation useful?",
+      "options": [
+        "It lets one parent listener handle events from many child elements",
+        "It automatically prevents default browser behavior",
+        "It makes all event handlers synchronous",
+        "It disables bubbling for nested elements"
+      ],
+      "answer": "It lets one parent listener handle events from many child elements",
+      "explanation": "Event delegation reduces listeners and works well for dynamic lists by relying on bubbling."
+    },
+    {
+      "id": "js-medium-3",
+      "category": "JavaScript",
+      "difficulty": "Medium",
+      "question": "What does an `async` function always return?",
+      "options": ["A callback", "A generator", "A Promise", "A string"],
+      "answer": "A Promise",
+      "explanation": "An `async` function wraps its returned value in a Promise automatically."
+    },
+    {
+      "id": "js-hard-1",
+      "category": "JavaScript",
+      "difficulty": "Hard",
+      "question": "When both a resolved Promise callback and `setTimeout(fn, 0)` are queued, which runs first?",
+      "options": [
+        "The Promise callback",
+        "The timeout callback",
+        "They always run in parallel",
+        "The browser decides randomly"
+      ],
+      "answer": "The Promise callback",
+      "explanation": "Promise callbacks are microtasks, and microtasks run before the next macrotask such as `setTimeout`."
+    },
+    {
+      "id": "js-hard-2",
+      "category": "JavaScript",
+      "difficulty": "Hard",
+      "question": "If an object does not contain a property directly, where does JavaScript look next during property access?",
+      "options": [
+        "In the prototype chain",
+        "In localStorage",
+        "In every open browser tab",
+        "In the global scope only"
+      ],
+      "answer": "In the prototype chain",
+      "explanation": "Property lookup moves up the prototype chain until the property is found or the chain ends."
+    },
+    {
+      "id": "js-hard-3",
+      "category": "JavaScript",
+      "difficulty": "Hard",
+      "question": "Which technique is best suited to delay a function until a burst of repeated events has stopped?",
+      "options": ["Memoization", "Debouncing", "Currying", "Hoisting"],
+      "answer": "Debouncing",
+      "explanation": "Debouncing waits for the event stream to pause before running the function."
+    },
+    {
+      "id": "html-easy-1",
+      "category": "HTML/CSS",
+      "difficulty": "Easy",
+      "question": "Which HTML element is most appropriate for the main heading area at the top of a page?",
+      "options": ["<header>", "<footer>", "<aside>", "<template>"],
+      "answer": "<header>",
+      "explanation": "`<header>` is the semantic container for introductory content and headings."
+    },
+    {
+      "id": "html-easy-2",
+      "category": "HTML/CSS",
+      "difficulty": "Easy",
+      "question": "Which CSS declaration enables Flexbox layout on a container?",
+      "options": ["display: block;", "display: inline;", "display: flex;", "position: flex;"],
+      "answer": "display: flex;",
+      "explanation": "Flexbox starts when an element is given `display: flex` or `display: inline-flex`."
+    },
+    {
+      "id": "html-easy-3",
+      "category": "HTML/CSS",
+      "difficulty": "Easy",
+      "question": "Which selector targets elements with the class name `card`?",
+      "options": ["#card", ".card", "card", "*card"],
+      "answer": ".card",
+      "explanation": "A period before the name selects elements by class in CSS."
+    },
+    {
+      "id": "html-medium-1",
+      "category": "HTML/CSS",
+      "difficulty": "Medium",
+      "question": "What does `grid-template-columns: repeat(3, 1fr);` create?",
+      "options": [
+        "Three equal-width columns",
+        "One row with three pixel-based columns",
+        "Three stacked rows",
+        "A single column that repeats content three times"
+      ],
+      "answer": "Three equal-width columns",
+      "explanation": "`repeat(3, 1fr)` makes three columns that each take one equal fraction of the space."
+    },
+    {
+      "id": "html-medium-2",
+      "category": "HTML/CSS",
+      "difficulty": "Medium",
+      "question": "What is the main purpose of `aria-label` in HTML?",
+      "options": [
+        "To provide an accessible name for assistive technologies",
+        "To apply a reusable CSS class",
+        "To create browser tooltips only",
+        "To force uppercase text rendering"
+      ],
+      "answer": "To provide an accessible name for assistive technologies",
+      "explanation": "`aria-label` gives screen readers a text label when visible text is missing or insufficient."
+    },
+    {
+      "id": "html-medium-3",
+      "category": "HTML/CSS",
+      "difficulty": "Medium",
+      "question": "What behavior does `position: sticky; top: 0;` usually produce?",
+      "options": [
+        "The element scrolls normally until it reaches the top, then sticks there",
+        "The element is permanently fixed to the viewport from page load",
+        "The element becomes hidden behind the body",
+        "The element is removed from document flow entirely"
+      ],
+      "answer": "The element scrolls normally until it reaches the top, then sticks there",
+      "explanation": "Sticky positioning acts relative at first, then behaves like fixed when its threshold is reached."
+    },
+    {
+      "id": "html-hard-1",
+      "category": "HTML/CSS",
+      "difficulty": "Hard",
+      "question": "Which selector has the highest specificity?",
+      "options": ["div .item", ".card .item", "#app .item", "section article"],
+      "answer": "#app .item",
+      "explanation": "An ID selector outweighs class and element selectors in CSS specificity."
+    },
+    {
+      "id": "html-hard-2",
+      "category": "HTML/CSS",
+      "difficulty": "Hard",
+      "question": "Why is adding the `defer` attribute to a script often useful?",
+      "options": [
+        "It delays script execution until after HTML parsing is complete",
+        "It converts the script into a CSS resource",
+        "It guarantees the script runs before the document starts parsing",
+        "It automatically minifies the script file"
+      ],
+      "answer": "It delays script execution until after HTML parsing is complete",
+      "explanation": "`defer` helps avoid blocking parsing and runs scripts after the document has been parsed."
+    },
+    {
+      "id": "html-hard-3",
+      "category": "HTML/CSS",
+      "difficulty": "Hard",
+      "question": "Which CSS property is commonly used to keep an image covering its container without distortion?",
+      "options": ["object-fit: cover;", "overflow: cover;", "image-fit: full;", "background-size: contain;"],
+      "answer": "object-fit: cover;",
+      "explanation": "`object-fit: cover` scales replaced elements like images to fill their box while preserving aspect ratio."
+    },
+    {
+      "id": "python-easy-1",
+      "category": "Python",
+      "difficulty": "Easy",
+      "question": "What is the result of `len(\"Quiz\")` in Python?",
+      "options": ["3", "4", "5", "An error"],
+      "answer": "4",
+      "explanation": "The string `Quiz` contains four characters, so `len()` returns 4."
+    },
+    {
+      "id": "python-easy-2",
+      "category": "Python",
+      "difficulty": "Easy",
+      "question": "Which data type is mutable in Python?",
+      "options": ["tuple", "str", "list", "frozenset"],
+      "answer": "list",
+      "explanation": "Lists can be modified in place by adding, removing, or replacing elements."
+    },
+    {
+      "id": "python-easy-3",
+      "category": "Python",
+      "difficulty": "Easy",
+      "question": "Which keyword defines a function in Python?",
+      "options": ["func", "define", "def", "lambda"],
+      "answer": "def",
+      "explanation": "Regular named functions are introduced with the `def` keyword."
+    },
+    {
+      "id": "python-medium-1",
+      "category": "Python",
+      "difficulty": "Medium",
+      "question": "What does the `yield` keyword do inside a function?",
+      "options": [
+        "Turns the function into a generator",
+        "Stops all loops in the program",
+        "Creates a class method automatically",
+        "Imports a module lazily"
+      ],
+      "answer": "Turns the function into a generator",
+      "explanation": "`yield` lets the function produce values one at a time while preserving its state."
+    },
+    {
+      "id": "python-medium-2",
+      "category": "Python",
+      "difficulty": "Medium",
+      "question": "What is the difference between `sorted(items)` and `items.sort()`?",
+      "options": [
+        "`sorted(items)` returns a new list, while `items.sort()` sorts the list in place",
+        "`items.sort()` returns a new list, while `sorted(items)` mutates the original",
+        "They are identical in every way",
+        "`sorted(items)` only works on tuples"
+      ],
+      "answer": "`sorted(items)` returns a new list, while `items.sort()` sorts the list in place",
+      "explanation": "`sorted()` leaves the original list untouched, but `.sort()` modifies the existing list."
+    },
+    {
+      "id": "python-medium-3",
+      "category": "Python",
+      "difficulty": "Medium",
+      "question": "What is `**kwargs` typically used for?",
+      "options": [
+        "Collecting variable keyword arguments into a dictionary",
+        "Forcing all arguments to be positional only",
+        "Declaring private variables inside a class",
+        "Creating a tuple of unnamed return values"
+      ],
+      "answer": "Collecting variable keyword arguments into a dictionary",
+      "explanation": "`**kwargs` gathers extra named arguments so functions can accept flexible keyword inputs."
+    },
+    {
+      "id": "python-hard-1",
+      "category": "Python",
+      "difficulty": "Hard",
+      "question": "Why can using a mutable object like `[]` as a default function argument be risky?",
+      "options": [
+        "The same object is reused across calls",
+        "Mutable defaults are slower than loops",
+        "Python refuses to compile the function",
+        "It automatically creates a deep copy each time"
+      ],
+      "answer": "The same object is reused across calls",
+      "explanation": "Default arguments are evaluated once when the function is defined, not each time it runs."
+    },
+    {
+      "id": "python-hard-2",
+      "category": "Python",
+      "difficulty": "Hard",
+      "question": "What does the `with` statement guarantee when using a context manager?",
+      "options": [
+        "Cleanup code runs when the block exits",
+        "The code inside the block becomes asynchronous",
+        "Exceptions are silently ignored",
+        "Variables become globally accessible"
+      ],
+      "answer": "Cleanup code runs when the block exits",
+      "explanation": "Context managers ensure setup and cleanup happen reliably, even if an error occurs."
+    },
+    {
+      "id": "python-hard-3",
+      "category": "Python",
+      "difficulty": "Hard",
+      "question": "What is true about a coroutine created by calling an `async def` function in Python?",
+      "options": [
+        "It must be awaited or scheduled to run",
+        "It runs immediately like a normal function",
+        "It always returns a thread object",
+        "It can only be used inside a class"
+      ],
+      "answer": "It must be awaited or scheduled to run",
+      "explanation": "Calling an `async def` function creates a coroutine object, which does not execute until awaited or scheduled."
+    },
+    {
+      "id": "dsa-easy-1",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Easy",
+      "question": "Which data structure follows the Last In, First Out principle?",
+      "options": ["Queue", "Stack", "Heap", "Graph"],
+      "answer": "Stack",
+      "explanation": "A stack removes the most recently added item first."
+    },
+    {
+      "id": "dsa-easy-2",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Easy",
+      "question": "What prerequisite does binary search require?",
+      "options": [
+        "The data must be sorted",
+        "The data must contain unique values",
+        "The array must have an odd length",
+        "The input must be a linked list"
+      ],
+      "answer": "The data must be sorted",
+      "explanation": "Binary search works by repeatedly halving an ordered search space."
+    },
+    {
+      "id": "dsa-easy-3",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Easy",
+      "question": "What is the time complexity of linear search in the worst case?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer": "O(n)",
+      "explanation": "Linear search may inspect every element, so its worst-case runtime grows proportionally with n."
+    },
+    {
+      "id": "dsa-medium-1",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Medium",
+      "question": "Which traversal is commonly used to find the shortest path in an unweighted graph?",
+      "options": ["DFS", "BFS", "Inorder traversal", "Postorder traversal"],
+      "answer": "BFS",
+      "explanation": "Breadth-first search explores layer by layer, so the first time it reaches a node is via the shortest unweighted path."
+    },
+    {
+      "id": "dsa-medium-2",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Medium",
+      "question": "What is the average-case time complexity of hash table lookup?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answer": "O(1)",
+      "explanation": "With a good hash function and controlled collisions, average lookup is constant time."
+    },
+    {
+      "id": "dsa-medium-3",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Medium",
+      "question": "What does a min-heap guarantee?",
+      "options": [
+        "The smallest element is at the root",
+        "All levels are fully sorted",
+        "Each node has exactly two children",
+        "Insertion is always O(1)"
+      ],
+      "answer": "The smallest element is at the root",
+      "explanation": "A min-heap only guarantees parent nodes are less than or equal to their children."
+    },
+    {
+      "id": "dsa-hard-1",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Hard",
+      "question": "Why does Dijkstra's algorithm fail on graphs with negative edge weights?",
+      "options": [
+        "A later negative edge can produce a shorter path after a node was finalized",
+        "Negative numbers cannot be stored in adjacency lists",
+        "The algorithm only works on trees",
+        "It requires recursive backtracking"
+      ],
+      "answer": "A later negative edge can produce a shorter path after a node was finalized",
+      "explanation": "Dijkstra assumes once the shortest node is chosen, no cheaper path will appear later, which negative edges break."
+    },
+    {
+      "id": "dsa-hard-2",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Hard",
+      "question": "Topological sorting is defined only for which kind of graph?",
+      "options": [
+        "Directed acyclic graph",
+        "Weighted undirected graph",
+        "Complete graph",
+        "Balanced binary tree"
+      ],
+      "answer": "Directed acyclic graph",
+      "explanation": "Topological order requires directed edges and no cycles, otherwise a valid ordering cannot exist."
+    },
+    {
+      "id": "dsa-hard-3",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Hard",
+      "question": "Which property makes an AVL tree self-balancing?",
+      "options": [
+        "The height difference between left and right subtrees stays within 1",
+        "Every node stores at least two keys",
+        "All leaves remain on the same level",
+        "Only insertions are allowed"
+      ],
+      "answer": "The height difference between left and right subtrees stays within 1",
+      "explanation": "AVL trees maintain a balance factor so operations remain logarithmic."
+    },
+    {
+      "id": "gk-easy-1",
+      "category": "General Knowledge",
+      "difficulty": "Easy",
+      "question": "What is the capital city of Japan?",
+      "options": ["Seoul", "Tokyo", "Kyoto", "Beijing"],
+      "answer": "Tokyo",
+      "explanation": "Tokyo is the capital and the largest metropolitan area in Japan."
+    },
+    {
+      "id": "gk-easy-2",
+      "category": "General Knowledge",
+      "difficulty": "Easy",
+      "question": "Which planet is commonly called the Red Planet?",
+      "options": ["Venus", "Mars", "Mercury", "Jupiter"],
+      "answer": "Mars",
+      "explanation": "Mars appears reddish because of iron oxide on its surface."
+    },
+    {
+      "id": "gk-easy-3",
+      "category": "General Knowledge",
+      "difficulty": "Easy",
+      "question": "Which ocean is the largest on Earth?",
+      "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+      "answer": "Pacific Ocean",
+      "explanation": "The Pacific Ocean covers more area than any other ocean on Earth."
+    },
+    {
+      "id": "gk-medium-1",
+      "category": "General Knowledge",
+      "difficulty": "Medium",
+      "question": "Which gas makes up most of Earth's atmosphere?",
+      "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+      "answer": "Nitrogen",
+      "explanation": "Nitrogen makes up roughly 78 percent of Earth's atmosphere."
+    },
+    {
+      "id": "gk-medium-2",
+      "category": "General Knowledge",
+      "difficulty": "Medium",
+      "question": "In which city is the headquarters of the World Health Organization located?",
+      "options": ["New York", "Geneva", "Paris", "Vienna"],
+      "answer": "Geneva",
+      "explanation": "The World Health Organization is headquartered in Geneva, Switzerland."
+    },
+    {
+      "id": "gk-medium-3",
+      "category": "General Knowledge",
+      "difficulty": "Medium",
+      "question": "Which scientist proposed the three laws of motion?",
+      "options": ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Nikola Tesla"],
+      "answer": "Isaac Newton",
+      "explanation": "Newton's laws of motion are foundational principles in classical mechanics."
+    },
+    {
+      "id": "gk-hard-1",
+      "category": "General Knowledge",
+      "difficulty": "Hard",
+      "question": "Which treaty formally ended World War I?",
+      "options": ["Treaty of Rome", "Treaty of Versailles", "Treaty of Paris", "Treaty of Tordesillas"],
+      "answer": "Treaty of Versailles",
+      "explanation": "The Treaty of Versailles, signed in 1919, formally ended the state of war between Germany and the Allied Powers."
+    },
+    {
+      "id": "gk-hard-2",
+      "category": "General Knowledge",
+      "difficulty": "Hard",
+      "question": "Which layer of Earth is liquid and lies between the mantle and the inner core?",
+      "options": ["Crust", "Outer core", "Lithosphere", "Mesosphere"],
+      "answer": "Outer core",
+      "explanation": "The outer core is a liquid layer of iron and nickel surrounding the inner core."
+    },
+    {
+      "id": "gk-hard-3",
+      "category": "General Knowledge",
+      "difficulty": "Hard",
+      "question": "Which planet has the shortest day in our solar system?",
+      "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+      "answer": "Jupiter",
+      "explanation": "Jupiter rotates faster than the other planets, completing a day in about 10 hours."
+    }
+  ]
+}
