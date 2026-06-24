@@ -1895,8 +1895,24 @@ body.theme-dark .duo-card {
 .trust-visual {
   min-height: 420px;
   position: relative;
-  padding: 24px;
+  padding: 28px;
   overflow: hidden;
+}
+
+.trust-visual-stack {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  display: grid;
+  align-content: center;
+  gap: 24px;
+}
+
+.trust-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+  align-items: center;
 }
 
 .trust-ring {
@@ -1921,7 +1937,7 @@ body.theme-dark .duo-card {
 
 .guide-card,
 .dialog-card {
-  position: absolute;
+  position: relative;
   border-radius: 20px;
   padding: 16px 18px;
   background: rgba(255, 255, 255, 0.92);
@@ -1938,7 +1954,8 @@ body.theme-dark .dialog-card {
   display: flex;
   align-items: center;
   gap: 14px;
-  width: min(280px, 88%);
+  width: 100%;
+  max-width: 320px;
 }
 
 .guide-card span {
@@ -1955,13 +1972,12 @@ body.theme-dark .dialog-card {
 }
 
 .guide-card-left {
-  left: 10%;
-  bottom: 14%;
+  grid-column: 1 / span 6;
 }
 
 .guide-card-right {
-  right: 8%;
-  top: 26%;
+  grid-column: 7 / -1;
+  justify-self: end;
 }
 
 .guide-avatar {
@@ -1976,14 +1992,15 @@ body.theme-dark .dialog-card {
 }
 
 .dialog-top {
-  top: 16%;
-  right: 18%;
+  justify-self: center;
+  width: min(360px, 100%);
+  text-align: center;
 }
 
 .dialog-bottom {
-  left: 34%;
-  bottom: 20%;
-  max-width: 240px;
+  grid-column: 7 / -1;
+  align-self: center;
+  max-width: 280px;
 }
 
 .course-showcase,
@@ -2246,14 +2263,23 @@ body.theme-dark .leaderboard-landing .leaderboard-item {
   .dialog-bottom,
   .guide-card-left,
   .guide-card-right {
-    position: static;
     width: 100%;
     max-width: none;
-    margin-top: 16px;
   }
 
   .trust-visual {
     min-height: auto;
+  }
+
+  .trust-row {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-card-left,
+  .guide-card-right,
+  .dialog-bottom {
+    grid-column: auto;
+    justify-self: stretch;
   }
 
   .floating-help-button {
