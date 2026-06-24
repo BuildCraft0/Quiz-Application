@@ -30,15 +30,15 @@ certificate generation.
 |-- login.html
 |-- README.md
 |-- vercel.json
-|-- assets/
-|   `-- data/
-|       `-- questions.json
-|-- css/
-|   `-- style.css
-`-- js/
-    |-- app.js
-    |-- login.js
-    `-- questions.js
+|-- src/
+|   |-- data/
+|   |   `-- questions.json
+|   |-- scripts/
+|   |   |-- app.js
+|   |   |-- login.js
+|   |   `-- questions.js
+|   `-- styles/
+|       `-- style.css
 `-- scripts/
     |-- serve.ps1
     `-- serve.bat
@@ -101,7 +101,7 @@ This project uses browser `localStorage` for:
 ## Notes
 
 - Do not open the project using `file://`
-- Use a local server so `assets/data/questions.json` can load correctly
+- Use a local server so `src/data/questions.json` can load correctly
 - Internet may be needed for CDN-loaded libraries such as Chart.js and jsPDF
 
 ## Tech Stack

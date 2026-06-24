@@ -1,4 +1,4 @@
-const QUESTIONS_URL = "./assets/data/questions.json";
+const QUESTIONS_URL = "./src/data/questions.json";
 
 export async function loadQuestions() {
   // Questions are stored separately so the quiz engine can fetch and filter them dynamically.
