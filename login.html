@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QuizMaster Pro Login</title>
+    <title>QuizMaster Pro Front Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,127 +12,290 @@
     />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body class="theme-dark auth-page">
+  <body class="theme-light front-page">
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
     <div class="ambient ambient-three"></div>
-    <div class="grid-overlay"></div>
 
-    <div class="auth-shell">
-      <header class="topbar glass-panel">
-        <div class="brand-cluster">
-          <div class="brand-mark">QM</div>
+    <div class="front-shell">
+      <header class="landing-header glass-panel">
+        <div class="landing-brand">
+          <div class="landing-logo">QM</div>
           <div>
-            <p class="eyebrow">Next-Gen Quiz Experience</p>
-            <h1>QuizMaster Pro</h1>
+            <strong>QuizMaster Pro</strong>
+            <span>Learn, Practice, Rank</span>
           </div>
         </div>
-        <div class="topbar-actions">
+
+        <nav class="landing-nav">
+          <button class="nav-pill" type="button">All Programs</button>
+          <a href="#courses">Skill Tracks</a>
+          <a href="#test-series">Real Tests</a>
+          <a href="#app-zone">Mobile App</a>
+          <a href="#mentors">Mentors</a>
+          <a href="#leaderboard-zone">Leaderboard</a>
+        </nav>
+
+        <div class="landing-actions">
           <button id="themeToggle" class="icon-button" type="button" aria-label="Toggle color mode">
-            <span id="themeToggleLabel">Light Mode</span>
+            <span id="themeToggleLabel">Dark Mode</span>
           </button>
+          <button id="openLoginButton" class="landing-login-button" type="button">Login/Register</button>
         </div>
       </header>
 
-      <main class="auth-main">
-        <section class="auth-stage">
-          <article class="glass-panel auth-story">
-            <div class="story-copy">
-              <p class="eyebrow">Separate Login Experience</p>
-              <h2>Walk into a quiz platform that feels fast, focused, and premium.</h2>
-              <p class="hero-copy">
-                Track your ranking, explore technical categories, unlock review mode, and move
-                from warm-up rounds to expert-level challenge sessions without friction.
+      <main class="landing-main">
+        <section class="hero-banner">
+          <div class="hero-slider-card">
+            <div class="hero-slide-copy">
+              <span id="heroBadge" class="hero-badge">Rank Boosting Practice</span>
+              <h1 id="heroTitle">Crack coding, aptitude, and logic with one focused platform.</h1>
+              <p id="heroDescription" class="hero-description">
+                Structured quiz tracks, live challenge rooms, and explanation-first review mode for
+                students who want real improvement.
               </p>
+              <div class="hero-cta-row">
+                <button id="heroPrimaryAction" class="hero-primary-button" type="button">Get Started</button>
+                <button id="heroSecondaryAction" class="hero-secondary-button" type="button">Explore Programs</button>
+              </div>
+              <div class="hero-price-panel">
+                <span>Starting From</span>
+                <strong id="heroOffer">Free + Premium Mock Packs</strong>
+              </div>
             </div>
 
-            <div class="story-metrics">
-              <article class="story-metric">
-                <span class="metric-label">Question Bank</span>
-                <strong id="questionBankCount">0</strong>
-              </article>
-              <article class="story-metric">
-                <span class="metric-label">Categories</span>
-                <strong id="categoryCount">0</strong>
-              </article>
-              <article class="story-metric">
-                <span class="metric-label">Difficulty Tiers</span>
-                <strong id="difficultyCount">0</strong>
-              </article>
-            </div>
+            <div class="hero-visual-zone">
+              <div class="visual-bubble bubble-one"></div>
+              <div class="visual-bubble bubble-two"></div>
+              <div class="visual-bubble bubble-three"></div>
 
-            <div class="story-chip-row">
-              <span class="info-chip">Dynamic JSON Engine</span>
-              <span class="info-chip">Analytics Dashboard</span>
-              <span class="info-chip">Leaderboard + Certificates</span>
-            </div>
+              <div class="hero-phone">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-stat">
+                    <span>Today's Accuracy</span>
+                    <strong id="phoneAccuracy">92%</strong>
+                  </div>
+                  <div class="phone-mini-chart">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="phone-card">
+                    <span>Live Quiz</span>
+                    <strong id="phoneTrack">JavaScript Sprint</strong>
+                  </div>
+                  <div class="phone-pill-row">
+                    <span>Timer</span>
+                    <span>Analytics</span>
+                    <span>Review</span>
+                  </div>
+                </div>
+              </div>
 
-            <div class="story-panel-grid">
-              <article class="mini-card">
-                <strong>Precision Practice</strong>
-                <span>Mix categories, search the bank, and tune difficulty with live filtering.</span>
-              </article>
-              <article class="mini-card">
-                <strong>Pressure System</strong>
-                <span>Use timers, lifelines, and retries to simulate real challenge conditions.</span>
-              </article>
-              <article class="mini-card">
-                <strong>Deep Review</strong>
-                <span>Inspect every answer, explanation, category trend, and score distribution.</span>
-              </article>
+              <div class="mentor-cluster mentor-left">
+                <div class="mentor-avatar avatar-one"></div>
+                <div class="mentor-avatar avatar-two"></div>
+                <div class="mentor-avatar avatar-three"></div>
+              </div>
+
+              <div class="mentor-cluster mentor-right">
+                <div class="mentor-avatar avatar-four"></div>
+                <div class="mentor-avatar avatar-five"></div>
+                <div class="mentor-avatar avatar-six"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="heroDots" class="hero-dots" aria-label="Hero slide navigation"></div>
+        </section>
+
+        <section class="quick-strip">
+          <article class="quick-strip-card">
+            <span class="metric-label">Question Bank</span>
+            <strong id="questionBankCount">0</strong>
+          </article>
+          <article class="quick-strip-card">
+            <span class="metric-label">Categories</span>
+            <strong id="categoryCount">0</strong>
+          </article>
+          <article class="quick-strip-card">
+            <span class="metric-label">Difficulty Tiers</span>
+            <strong id="difficultyCount">0</strong>
+          </article>
+          <article class="quick-strip-card">
+            <span class="metric-label">Leaderboard Players</span>
+            <strong id="leaderboardCount">0</strong>
+          </article>
+        </section>
+
+        <section class="trust-section">
+          <div class="trust-copy">
+            <p class="eyebrow">Bharat-Friendly Learning</p>
+            <h2>Trusted, affordable, and built for serious practice.</h2>
+            <p>
+              QuizMaster Pro helps students train with realistic question flows, category-focused
+              drills, and strong review analytics without making the experience feel heavy or boring.
+            </p>
+            <div class="trust-bullets">
+              <span>Adaptive category selection</span>
+              <span>Fast revision from bookmarks</span>
+              <span>Certificates for high performers</span>
+            </div>
+            <button id="getStartedButton" class="landing-login-button" type="button">Get Started</button>
+          </div>
+
+          <div class="trust-visual" id="mentors">
+            <div class="trust-ring ring-one"></div>
+            <div class="trust-ring ring-two"></div>
+            <div class="guide-card guide-card-left">
+              <div class="guide-avatar"></div>
+              <div>
+                <span>Practice Coach</span>
+                <strong>Smart quiz paths for daily revision</strong>
+              </div>
+            </div>
+            <div class="guide-card guide-card-right">
+              <div class="guide-avatar secondary"></div>
+              <div>
+                <span>Analytics Mentor</span>
+                <strong>Know where you lose marks and why</strong>
+              </div>
+            </div>
+            <div class="dialog-card dialog-top">How do I improve my quiz speed?</div>
+            <div class="dialog-card dialog-bottom">Train with timers, retries, and explanation review.</div>
+          </div>
+        </section>
+
+        <section id="courses" class="course-showcase">
+          <div class="section-heading-row">
+            <div>
+              <p class="eyebrow">Explore Tracks</p>
+              <h3>Popular learning paths for rank-focused students</h3>
+            </div>
+            <span class="tag">Updated Weekly</span>
+          </div>
+
+          <div class="course-grid">
+            <article class="course-card emphasis">
+              <span class="course-tag">Top Pick</span>
+              <h4>JavaScript Master Sprint</h4>
+              <p>Sharpen closures, async logic, DOM patterns, and interview-style problem solving.</p>
+              <div class="course-meta-row">
+                <span>42 drills</span>
+                <span>Advanced analytics</span>
+              </div>
+            </article>
+            <article class="course-card">
+              <span class="course-tag">Exam Mode</span>
+              <h4>HTML/CSS Design Battles</h4>
+              <p>Timed rounds, responsive tasks, and deep review for frontend confidence building.</p>
+              <div class="course-meta-row">
+                <span>28 guided sets</span>
+                <span>UI review notes</span>
+              </div>
+            </article>
+            <article class="course-card">
+              <span class="course-tag">Core Logic</span>
+              <h4>Python + DSA Foundation</h4>
+              <p>Practice syntax, data structures, and algorithm thinking in one progressive track.</p>
+              <div class="course-meta-row">
+                <span>55 practice sets</span>
+                <span>Difficulty ladder</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="duo-section">
+          <article id="test-series" class="duo-card dark">
+            <p class="eyebrow">Test Series</p>
+            <h3>Simulate pressure with real-timer challenge sessions.</h3>
+            <p>Auto-submit timers, 50-50 lifelines, performance charts, and retry modes built in.</p>
+            <div class="mini-pill-row">
+              <span>Timed mode</span>
+              <span>Rank feel</span>
+              <span>Instant review</span>
             </div>
           </article>
 
-          <aside class="glass-panel auth-panel">
-            <div id="continuePanel" class="continue-card hidden">
-              <div>
-                <p class="eyebrow">Session Found</p>
-                <h3>Continue as <span id="continueUsername">Player</span></h3>
+          <article id="app-zone" class="duo-card light">
+            <p class="eyebrow">Student Support</p>
+            <h3>Practice anywhere with a mobile-first experience.</h3>
+            <p>Responsive screens, saved progress, leaderboard visibility, and bookmark-based revision flows.</p>
+            <div class="scan-card">
+              <div class="scan-grid">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
               </div>
-              <div class="continue-actions">
-                <button id="continueButton" class="secondary-button" type="button">Open Dashboard</button>
-                <button id="switchAccountButton" class="ghost-button" type="button">Use Another Username</button>
-              </div>
+              <strong>Scan for App Preview</strong>
             </div>
+          </article>
+        </section>
 
-            <div class="card-header auth-header">
-              <div>
-                <p class="eyebrow">Login</p>
-                <h3>Start with your username</h3>
-              </div>
-              <span class="tag">LocalStorage Auth</span>
+        <section id="leaderboard-zone" class="leaderboard-showcase">
+          <div class="section-heading-row">
+            <div>
+              <p class="eyebrow">Hall of Fame</p>
+              <h3>Top performers on the platform</h3>
             </div>
-
-            <form id="loginForm" class="stack-md">
-              <label class="field">
-                <span>Username</span>
-                <input
-                  id="usernameInput"
-                  type="text"
-                  name="username"
-                  maxlength="24"
-                  autocomplete="username"
-                  placeholder="Enter your username"
-                  required
-                />
-              </label>
-              <button class="primary-button full-width" type="submit">Enter QuizMaster Pro</button>
-            </form>
-
-            <p class="login-note">
-              Your score history, bookmarks, and leaderboard entries stay saved in this browser.
-            </p>
-
-            <div class="card-header compact">
-              <div>
-                <p class="eyebrow">Hall of Fame</p>
-                <h4>Top Players</h4>
-              </div>
-            </div>
-            <div id="publicLeaderboard" class="leaderboard-list"></div>
-          </aside>
+            <button id="leaderboardLoginButton" class="hero-secondary-button" type="button">Join the Rankings</button>
+          </div>
+          <div id="publicLeaderboard" class="leaderboard-list leaderboard-landing"></div>
         </section>
       </main>
+
+      <button id="floatingHelpButton" class="floating-help-button" type="button">Login</button>
+    </div>
+
+    <div id="authModal" class="auth-modal hidden">
+      <div class="auth-modal-backdrop" data-close-auth="true"></div>
+      <div class="auth-modal-panel glass-panel">
+        <button id="closeAuthModal" class="auth-close-button" type="button" aria-label="Close login panel">×</button>
+
+        <div id="continuePanel" class="continue-card hidden">
+          <div>
+            <p class="eyebrow">Session Found</p>
+            <h3>Continue as <span id="continueUsername">Player</span></h3>
+          </div>
+          <div class="continue-actions">
+            <button id="continueButton" class="secondary-button" type="button">Open Dashboard</button>
+            <button id="switchAccountButton" class="ghost-button" type="button">Use Another Username</button>
+          </div>
+        </div>
+
+        <div class="card-header auth-header">
+          <div>
+            <p class="eyebrow">Login</p>
+            <h3>Start your QuizMaster Pro journey</h3>
+          </div>
+          <span class="tag">LocalStorage Auth</span>
+        </div>
+
+        <form id="loginForm" class="stack-md">
+          <label class="field">
+            <span>Username</span>
+            <input
+              id="usernameInput"
+              type="text"
+              name="username"
+              maxlength="24"
+              autocomplete="username"
+              placeholder="Enter your username"
+              required
+            />
+          </label>
+          <button class="primary-button full-width" type="submit">Enter QuizMaster Pro</button>
+        </form>
+
+        <p class="login-note">
+          Your score history, bookmarks, and leaderboard entries stay saved in this browser.
+        </p>
+      </div>
     </div>
 
     <div id="toastContainer" class="toast-container" aria-live="polite"></div>
