@@ -52,6 +52,14 @@ const elements = {
   performanceSummary: document.querySelector("#performanceSummary"),
   favoriteTrack: document.querySelector("#favoriteTrack"),
   readinessBadge: document.querySelector("#readinessBadge"),
+  radarSummary: document.querySelector("#radarSummary"),
+  radarCountBadge: document.querySelector("#radarCountBadge"),
+  recentSummary: document.querySelector("#recentSummary"),
+  recentCountBadge: document.querySelector("#recentCountBadge"),
+  bookmarkSummary: document.querySelector("#bookmarkSummary"),
+  bookmarkCountBadge: document.querySelector("#bookmarkCountBadge"),
+  leaderboardSummary: document.querySelector("#leaderboardSummary"),
+  leaderboardCountBadge: document.querySelector("#leaderboardCountBadge"),
   bookmarksList: document.querySelector("#bookmarksList"),
   practiceBookmarksButton: document.querySelector("#practiceBookmarksButton"),
   dashboardLeaderboard: document.querySelector("#dashboardLeaderboard"),
@@ -296,8 +304,19 @@ function renderRecentScores() {
     .sort((left, right) => new Date(right.timestamp) - new Date(left.timestamp))
     .slice(0, 5);
 
+  setTextIfPresent(
+    elements.recentSummary,
+    scores.length
+      ? `Showing your ${scores.length} most recent attempt${scores.length === 1 ? "" : "s"} with score and accuracy trends.`
+      : "Your latest quiz attempts will appear here with score trends.",
+  );
+  setTextIfPresent(elements.recentCountBadge, `${scores.length} Attempt${scores.length === 1 ? "" : "s"}`);
+
   if (!scores.length) {
-    elements.recentScores.innerHTML = `<div class="empty-state">Your score history will appear here after your first quiz.</div>`;
+    elements.recentScores.innerHTML = renderPanelEmptyState(
+      "Timeline Empty",
+      "Your score history will appear here after your first completed quiz session.",
+    );
     return;
   }
 
@@ -305,12 +324,21 @@ function renderRecentScores() {
     .map(
       (score) => `
         <article class="history-item">
-          <strong>${escapeHtml(score.categoriesLabel)}</strong>
+          <div class="history-top">
+            <div>
+              <span class="item-label">Session</span>
+              <strong>${escapeHtml(score.categoriesLabel)}</strong>
+            </div>
+            <span class="score-pill">${score.score} pts</span>
+          </div>
           <div class="history-meta">
             <span>${formatDate(score.timestamp)}</span>
             <span>${score.accuracy}% accuracy</span>
-            <span>${score.score} points</span>
+            <span>${formatDuration(score.timeTakenMs)}</span>
             <span>${score.rating}</span>
+          </div>
+          <div class="history-bar">
+            <span style="width: ${score.accuracy}%"></span>
           </div>
         </article>
       `,
@@ -321,8 +349,19 @@ function renderRecentScores() {
 function renderBookmarks() {
   const bookmarkedIds = state.profile?.bookmarks || [];
 
+  setTextIfPresent(
+    elements.bookmarkSummary,
+    bookmarkedIds.length
+      ? `${bookmarkedIds.length} bookmarked question${bookmarkedIds.length === 1 ? "" : "s"} saved for targeted revision.`
+      : "Build a revision pocket by bookmarking difficult questions.",
+  );
+  setTextIfPresent(elements.bookmarkCountBadge, `${bookmarkedIds.length} Saved`);
+
   if (!bookmarkedIds.length) {
-    elements.bookmarksList.innerHTML = `<div class="empty-state">Bookmark questions during a quiz to build a personalized practice set.</div>`;
+    elements.bookmarksList.innerHTML = renderPanelEmptyState(
+      "No Bookmarks Yet",
+      "Bookmark questions during a quiz to build a personalized deep-practice set.",
+    );
     elements.practiceBookmarksButton.disabled = true;
     return;
   }
@@ -334,11 +373,15 @@ function renderBookmarks() {
     .map(
       (question) => `
         <article class="bookmark-item">
-          <strong>${escapeHtml(question.question)}</strong>
+          <div class="bookmark-top">
+            <strong>${escapeHtml(question.question)}</strong>
+            <span class="bookmark-pill">Saved</span>
+          </div>
           <div class="bookmark-meta">
             <span>${escapeHtml(question.category)}</span>
             <span>${escapeHtml(question.difficulty)}</span>
           </div>
+          <p class="bookmark-note">Ready for focused re-attempts and revision sessions.</p>
         </article>
       `,
     )
@@ -360,9 +403,19 @@ function updateQuestionExplorer() {
   elements.poolSummary.textContent = matchingQuestions.length
     ? `${Math.min(questionCount, matchingQuestions.length)} question${Math.min(questionCount, matchingQuestions.length) === 1 ? "" : "s"} ready from ${matchingQuestions.length} match${matchingQuestions.length === 1 ? "" : "es"}.`
     : "No questions match the current filters.";
+  setTextIfPresent(
+    elements.radarSummary,
+    matchingQuestions.length
+      ? `Showing ${previewItems.length} live preview card${previewItems.length === 1 ? "" : "s"} from ${matchingQuestions.length} matched question${matchingQuestions.length === 1 ? "" : "s"}.`
+      : "Live question previews based on your current filter stack.",
+  );
+  setTextIfPresent(elements.radarCountBadge, `${matchingQuestions.length} Match${matchingQuestions.length === 1 ? "" : "es"}`);
 
   if (!previewItems.length) {
-    elements.searchResultsPreview.innerHTML = `<div class="empty-state">No questions match your current search and filters.</div>`;
+    elements.searchResultsPreview.innerHTML = renderPanelEmptyState(
+      "No Matches Found",
+      "Adjust categories, difficulty, or search terms to reveal matching questions here.",
+    );
     return;
   }
 
@@ -370,9 +423,13 @@ function updateQuestionExplorer() {
     .map(
       (question) => `
         <article class="search-preview-item">
+          <div class="search-preview-top">
+            <span class="preview-badge">${escapeHtml(question.category)}</span>
+            <span class="preview-badge secondary">${escapeHtml(question.difficulty)}</span>
+          </div>
           <strong>${escapeHtml(question.question)}</strong>
           <p>${escapeHtml(question.explanation)}</p>
-          <small>${escapeHtml(question.category)} / ${escapeHtml(question.difficulty)}</small>
+          <small>Concept Preview / Explanation Ready</small>
         </article>
       `,
     )
@@ -1072,6 +1129,13 @@ function retryIncorrectQuestions() {
 
 function renderLeaderboard() {
   const topScores = getSortedLeaderboard().slice(0, 10);
+  setTextIfPresent(
+    elements.leaderboardSummary,
+    topScores.length
+      ? `Showing ${topScores.length} ranked player${topScores.length === 1 ? "" : "s"} ordered by score, then completion speed.`
+      : "Highest score wins. Faster completion time breaks ties.",
+  );
+  setTextIfPresent(elements.leaderboardCountBadge, `${topScores.length} Ranked`);
 
   const markup = topScores.length
     ? topScores
@@ -1080,9 +1144,11 @@ function renderLeaderboard() {
             <article class="leaderboard-item">
               <div class="rank-badge">${index + 1}</div>
               <div>
-                <strong>${escapeHtml(entry.username)}</strong>
+                <div class="leaderboard-top">
+                  <strong>${escapeHtml(entry.username)}</strong>
+                  <span class="score-pill">${entry.score} pts</span>
+                </div>
                 <div class="leaderboard-meta">
-                  <span>${entry.score} pts</span>
                   <span>${entry.accuracy}% accuracy</span>
                   <span>${formatDuration(entry.timeTakenMs)}</span>
                 </div>
@@ -1092,9 +1158,21 @@ function renderLeaderboard() {
           `,
         )
         .join("")
-    : `<div class="empty-state">Complete a quiz to populate the leaderboard.</div>`;
+    : renderPanelEmptyState(
+        "Leaderboard Locked",
+        "Complete a quiz to publish the first ranked score on the board.",
+      );
 
   elements.dashboardLeaderboard.innerHTML = markup;
+}
+
+function renderPanelEmptyState(title, description) {
+  return `
+    <div class="empty-state advanced-empty-state">
+      <strong>${escapeHtml(title)}</strong>
+      <p>${escapeHtml(description)}</p>
+    </div>
+  `;
 }
 
 function showDashboard() {

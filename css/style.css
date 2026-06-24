@@ -589,6 +589,142 @@ body.theme-light .leaderboard-item {
   font-size: 0.85rem;
 }
 
+.panel-summary-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+body.theme-light .panel-summary-strip {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(16, 35, 61, 0.08);
+}
+
+.panel-chip,
+.score-pill,
+.bookmark-pill,
+.preview-badge,
+.item-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.panel-chip,
+.bookmark-pill,
+.preview-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(91, 76, 226, 0.1);
+  color: #6a57f5;
+}
+
+.preview-badge.secondary {
+  background: rgba(46, 196, 182, 0.12);
+  color: #24ab9e;
+}
+
+.score-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 201, 40, 0.16), rgba(255, 159, 28, 0.18));
+  color: var(--text);
+}
+
+.item-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.search-preview-item,
+.history-item,
+.bookmark-item {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.search-preview-item strong,
+.history-item strong,
+.bookmark-item strong,
+.leaderboard-top strong {
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.search-preview-top,
+.history-top,
+.bookmark-top,
+.leaderboard-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.search-preview-item small {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.history-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.theme-light .history-bar {
+  background: rgba(16, 35, 61, 0.07);
+}
+
+.history-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.bookmark-note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.advanced-empty-state {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  text-align: left;
+}
+
+.advanced-empty-state strong {
+  font-size: 1rem;
+}
+
+.advanced-empty-state p {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
 .welcome-banner {
   display: flex;
   justify-content: space-between;
