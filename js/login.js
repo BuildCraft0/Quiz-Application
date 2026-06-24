@@ -169,6 +169,8 @@ function restoreExistingSession() {
 
   elements.continueUsername.textContent = username;
   elements.usernameInput.value = username;
+  elements.openLoginButton.textContent = "Continue";
+  elements.floatingHelpButton.textContent = "Continue";
   elements.continuePanel.classList.remove("hidden");
 }
 
