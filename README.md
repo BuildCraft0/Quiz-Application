@@ -1,6 +1,6 @@
-# QuizMaster Pro
+# Quiz Application
 
-QuizMaster Pro is a modern quiz application built with HTML, CSS, and Vanilla JavaScript.
+Quiz Application is a modern quiz platform built with HTML, CSS, and Vanilla JavaScript.
 It includes a separate landing/login experience, a dashboard-style quiz workspace, dynamic
 question loading, timers, lifelines, leaderboard tracking, bookmarks, analytics, and
 certificate generation.

@@ -1,6 +1,13 @@
 import { loadQuestions, uniqueValues } from "./questions.js";
 
 const STORAGE_KEYS = {
+  currentUser: "quiz_application_current_user",
+  profiles: "quiz_application_profiles",
+  leaderboard: "quiz_application_leaderboard",
+  theme: "quiz_application_theme",
+};
+
+const LEGACY_STORAGE_KEYS = {
   currentUser: "quizmasterpro_current_user",
   profiles: "quizmasterpro_profiles",
   leaderboard: "quizmasterpro_leaderboard",
@@ -77,6 +84,7 @@ const elements = {
 document.addEventListener("DOMContentLoaded", initializeLoginPage);
 
 async function initializeLoginPage() {
+  migrateLegacyStorage();
   bindEvents();
   restoreTheme();
   restoreExistingSession();
@@ -274,6 +282,22 @@ function restartHeroAutoplay() {
 
 function scrollToCourses() {
   document.querySelector("#courses")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function migrateLegacyStorage() {
+  Object.entries(STORAGE_KEYS).forEach(([name, nextKey]) => {
+    const legacyKey = LEGACY_STORAGE_KEYS[name];
+
+    if (!legacyKey || localStorage.getItem(nextKey) !== null) {
+      return;
+    }
+
+    const legacyValue = localStorage.getItem(legacyKey);
+
+    if (legacyValue !== null) {
+      localStorage.setItem(nextKey, legacyValue);
+    }
+  });
 }
 
 function getProfiles() {

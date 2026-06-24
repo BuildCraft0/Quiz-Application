@@ -6,6 +6,13 @@ import {
 } from "./questions.js";
 
 const STORAGE_KEYS = {
+  currentUser: "quiz_application_current_user",
+  profiles: "quiz_application_profiles",
+  leaderboard: "quiz_application_leaderboard",
+  theme: "quiz_application_theme",
+};
+
+const LEGACY_STORAGE_KEYS = {
   currentUser: "quizmasterpro_current_user",
   profiles: "quizmasterpro_profiles",
   leaderboard: "quizmasterpro_leaderboard",
@@ -116,6 +123,7 @@ const elements = {
 document.addEventListener("DOMContentLoaded", initializeApp);
 
 async function initializeApp() {
+  migrateLegacyStorage();
   restoreTheme();
   const hasSession = restoreSession();
 
@@ -1252,7 +1260,7 @@ function downloadCertificateAsPdf() {
   documentPdf.setTextColor(255, 209, 102);
   documentPdf.setFont("helvetica", "bold");
   documentPdf.setFontSize(28);
-  documentPdf.text("QuizMaster Pro", 148.5, 38, { align: "center" });
+  documentPdf.text("Quiz Application", 148.5, 38, { align: "center" });
 
   documentPdf.setTextColor(243, 248, 255);
   documentPdf.setFontSize(20);
@@ -1281,7 +1289,7 @@ function downloadCertificateAsPdf() {
   documentPdf.setFont("helvetica", "bold");
   documentPdf.text("Performance Rating: " + state.lastResult.rating, 148.5, 160, { align: "center" });
 
-  documentPdf.save(`${state.lastResult.username.replace(/\s+/g, "_").toLowerCase()}-quizmaster-pro-certificate.pdf`);
+  documentPdf.save(`${state.lastResult.username.replace(/\s+/g, "_").toLowerCase()}-quiz-application-certificate.pdf`);
 }
 
 function ensureAudioContext() {
@@ -1347,6 +1355,22 @@ function getSortedLeaderboard() {
     }
 
     return left.timeTakenMs - right.timeTakenMs;
+  });
+}
+
+function migrateLegacyStorage() {
+  Object.entries(STORAGE_KEYS).forEach(([name, nextKey]) => {
+    const legacyKey = LEGACY_STORAGE_KEYS[name];
+
+    if (!legacyKey || localStorage.getItem(nextKey) !== null) {
+      return;
+    }
+
+    const legacyValue = localStorage.getItem(legacyKey);
+
+    if (legacyValue !== null) {
+      localStorage.setItem(nextKey, legacyValue);
+    }
   });
 }
 
