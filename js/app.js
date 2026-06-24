@@ -1143,7 +1143,7 @@ function renderLeaderboard() {
           (entry, index) => `
             <article class="leaderboard-item">
               <div class="rank-badge">${index + 1}</div>
-              <div>
+              <div class="leaderboard-main">
                 <div class="leaderboard-top">
                   <strong>${escapeHtml(entry.username)}</strong>
                   <span class="score-pill">${entry.score} pts</span>
@@ -1153,7 +1153,10 @@ function renderLeaderboard() {
                   <span>${formatDuration(entry.timeTakenMs)}</span>
                 </div>
               </div>
-              <span class="tag">${escapeHtml(entry.categoriesLabel || "Mixed")}</span>
+              <div class="leaderboard-track">
+                <span class="track-label">Track</span>
+                <strong>${escapeHtml(entry.categoriesLabel || "Mixed")}</strong>
+              </div>
             </article>
           `,
         )

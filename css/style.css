@@ -554,7 +554,7 @@ body.theme-light .lifeline-button {
 
 .leaderboard-item {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) minmax(150px, 210px);
   gap: 12px;
   align-items: center;
   border-radius: var(--radius-md);
@@ -587,6 +587,41 @@ body.theme-light .leaderboard-item {
   gap: 8px;
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+.leaderboard-main {
+  min-width: 0;
+}
+
+.leaderboard-track {
+  justify-self: stretch;
+  align-self: stretch;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-wrap: anywhere;
+}
+
+body.theme-light .leaderboard-track {
+  background: rgba(245, 248, 255, 0.96);
+  border-color: rgba(16, 35, 61, 0.08);
+}
+
+.track-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.leaderboard-track strong {
+  display: block;
+  font-size: 0.96rem;
+  line-height: 1.45;
 }
 
 .panel-summary-strip {
