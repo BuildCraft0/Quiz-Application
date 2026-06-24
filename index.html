@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QuizMaster Pro</title>
+    <title>QuizMaster Pro Workspace</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,16 +12,20 @@
     />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body class="theme-dark">
+  <body class="theme-dark dashboard-page">
     <div class="ambient ambient-one"></div>
     <div class="ambient ambient-two"></div>
     <div class="ambient ambient-three"></div>
+    <div class="grid-overlay"></div>
 
     <div class="app-shell">
       <header class="topbar glass-panel">
-        <div>
-          <p class="eyebrow">Modern Quiz Platform</p>
-          <h1>QuizMaster Pro</h1>
+        <div class="brand-cluster">
+          <div class="brand-mark">QM</div>
+          <div>
+            <p class="eyebrow">Adaptive Quiz Workspace</p>
+            <h1>QuizMaster Pro</h1>
+          </div>
         </div>
         <div class="topbar-actions">
           <div id="userBadge" class="user-badge hidden">
@@ -35,100 +39,174 @@
       </header>
 
       <main class="main-content">
-        <section id="authSection" class="view">
-          <div class="split-layout">
-            <article class="hero-card glass-panel">
-              <p class="eyebrow">Adaptive Practice Experience</p>
-              <h2>Sharpen your skills with a quiz app that feels premium.</h2>
-              <p class="hero-copy">
-                Play across five categories, mix difficulty levels, use strategic lifelines,
-                track detailed analytics, and earn a certificate when you cross the mastery line.
-              </p>
-              <div class="feature-grid">
-                <div class="mini-card">
-                  <strong>Dynamic Engine</strong>
-                  <span>JSON-powered questions, shuffled sessions, no repeats.</span>
-                </div>
-                <div class="mini-card">
-                  <strong>Deep Insights</strong>
-                  <span>Charts, leaderboard tracking, score history, and review mode.</span>
-                </div>
-                <div class="mini-card">
-                  <strong>Built for Focus</strong>
-                  <span>Timer pressure, bookmarks, retries, and clean responsive layouts.</span>
-                </div>
-              </div>
-            </article>
-
-            <aside class="auth-card glass-panel">
-              <div class="card-header">
-                <p class="eyebrow">Login</p>
-                <h3>Start with your username</h3>
-              </div>
-              <form id="loginForm" class="stack-md">
-                <label class="field">
-                  <span>Username</span>
-                  <input
-                    id="usernameInput"
-                    type="text"
-                    name="username"
-                    maxlength="24"
-                    autocomplete="username"
-                    placeholder="Enter your username"
-                    required
-                  />
-                </label>
-                <button class="primary-button" type="submit">Enter QuizMaster Pro</button>
-              </form>
-
-              <div class="info-row">
-                <span class="info-chip">5 Categories</span>
-                <span class="info-chip">3 Difficulty Levels</span>
-                <span class="info-chip">Top 10 Leaderboard</span>
-              </div>
-
-              <div class="card-header compact">
-                <p class="eyebrow">Hall of Fame</p>
-                <h4>Top Players</h4>
-              </div>
-              <div id="publicLeaderboard" class="leaderboard-list"></div>
-            </aside>
-          </div>
-        </section>
-
         <section id="dashboardSection" class="view hidden">
-          <div class="dashboard-grid">
-            <aside class="sidebar stack-lg">
-              <article class="glass-panel profile-card">
-                <div class="card-header compact">
-                  <p class="eyebrow">Profile</p>
-                  <h3 id="profileName">Player</h3>
+          <div class="section-stack">
+            <section class="hero-grid">
+              <article class="glass-panel control-hero">
+                <div class="hero-copy-block">
+                  <p class="eyebrow">Mission Control</p>
+                  <h2>Welcome back, <span id="dashboardWelcome">Player</span>.</h2>
+                  <p class="hero-copy">
+                    Tune the difficulty, mix categories, scan your performance, and launch a
+                    focused quiz sprint from one advanced command center.
+                  </p>
                 </div>
-                <div class="stat-pair-grid">
-                  <div class="metric-card">
+
+                <div class="hero-insight-grid">
+                  <article class="hero-stat-card">
+                    <span class="metric-label">Question Bank</span>
+                    <strong id="loadedQuestionCount">0</strong>
+                    <p>Curated questions across five technical and general tracks.</p>
+                  </article>
+                  <article class="hero-stat-card accent">
+                    <span class="metric-label">Matching Now</span>
+                    <strong id="matchingQuestionCount">0</strong>
+                    <p>Questions available under your current filters and search.</p>
+                  </article>
+                  <article class="hero-stat-card">
+                    <span class="metric-label">Player Level</span>
+                    <strong id="profileLevel">Rookie</strong>
+                    <p>Calculated from quiz volume, best score, and recent consistency.</p>
+                  </article>
+                </div>
+
+                <div class="signal-grid">
+                  <article class="signal-card">
+                    <span class="section-label">Performance Summary</span>
+                    <strong id="performanceSummary">Loading your performance insights...</strong>
+                  </article>
+                  <article class="signal-card">
+                    <span class="section-label">Favorite Track</span>
+                    <strong id="favoriteTrack">Mixed Topics</strong>
+                  </article>
+                  <article class="signal-card">
+                    <span class="section-label">Readiness Status</span>
+                    <strong id="readinessBadge">Ready to build your next challenge.</strong>
+                  </article>
+                </div>
+              </article>
+
+              <aside class="glass-panel profile-panel">
+                <div class="profile-top">
+                  <div>
+                    <p class="eyebrow">Player Profile</p>
+                    <h3 id="profileName">Player</h3>
+                    <p class="profile-subtext">Your personal quiz cockpit with live performance cues.</p>
+                  </div>
+                  <div class="profile-emblem">QM</div>
+                </div>
+
+                <div class="profile-highlight-grid">
+                  <article class="metric-card">
                     <span class="metric-label">Quizzes Taken</span>
                     <strong id="profileQuizCount">0</strong>
-                  </div>
-                  <div class="metric-card">
+                  </article>
+                  <article class="metric-card">
                     <span class="metric-label">Best Score</span>
                     <strong id="profileBestScore">0</strong>
-                  </div>
-                  <div class="metric-card">
+                  </article>
+                  <article class="metric-card">
                     <span class="metric-label">Avg. Accuracy</span>
                     <strong id="profileAverageAccuracy">0%</strong>
-                  </div>
-                  <div class="metric-card">
+                  </article>
+                  <article class="metric-card">
+                    <span class="metric-label">Last Rating</span>
+                    <strong id="profileLastRating">Unranked</strong>
+                  </article>
+                </div>
+
+                <div class="profile-footer">
+                  <div class="mini-summary">
                     <span class="metric-label">Bookmarks</span>
                     <strong id="profileBookmarkCount">0</strong>
                   </div>
+                  <div class="mini-summary">
+                    <span class="metric-label">Practice Streak</span>
+                    <strong id="profileStreak">0 days</strong>
+                  </div>
                 </div>
-                <button id="logoutButton" class="ghost-button full-width" type="button">Log Out</button>
+
+                <button id="logoutButton" class="ghost-button full-width" type="button">Switch Account</button>
+              </aside>
+            </section>
+
+            <section class="workspace-grid">
+              <article class="glass-panel architect-panel stack-lg">
+                <div class="card-header compact">
+                  <div>
+                    <p class="eyebrow">Quiz Architect</p>
+                    <h3>Craft a Custom Session</h3>
+                  </div>
+                  <span class="tag">Dynamic Filters</span>
+                </div>
+
+                <div class="stack-md">
+                  <div>
+                    <label class="section-label">Categories</label>
+                    <div id="categoryFilters" class="chip-grid"></div>
+                  </div>
+
+                  <div>
+                    <label class="section-label">Difficulty Levels</label>
+                    <div id="difficultyFilters" class="chip-grid"></div>
+                  </div>
+
+                  <div class="form-grid">
+                    <label class="field">
+                      <span>Questions Per Quiz</span>
+                      <select id="questionCountSelect">
+                        <option value="5">5 Questions</option>
+                        <option value="10" selected>10 Questions</option>
+                        <option value="15">15 Questions</option>
+                      </select>
+                    </label>
+
+                    <label class="field">
+                      <span>Search Questions</span>
+                      <input
+                        id="questionSearchInput"
+                        type="search"
+                        placeholder="Search by keyword, topic, or concept"
+                      />
+                    </label>
+                  </div>
+
+                  <div class="summary-ribbon">
+                    <span class="summary-dot"></span>
+                    <span id="poolSummary">Ready to build a quiz.</span>
+                  </div>
+                </div>
+
+                <button id="startQuizButton" class="primary-button" type="button">Launch Quiz Session</button>
               </article>
 
-              <article class="glass-panel">
+              <article class="glass-panel explorer-panel stack-lg">
                 <div class="card-header compact">
-                  <p class="eyebrow">Bookmarks</p>
-                  <h3>Saved Questions</h3>
+                  <div>
+                    <p class="eyebrow">Question Radar</p>
+                    <h3>Preview the Matching Pool</h3>
+                  </div>
+                  <span class="tag secondary">Live Search</span>
+                </div>
+                <div id="searchResultsPreview" class="search-preview-list"></div>
+              </article>
+
+              <article class="glass-panel activity-panel stack-lg">
+                <div class="card-header compact">
+                  <div>
+                    <p class="eyebrow">Recent Attempts</p>
+                    <h3>Performance Timeline</h3>
+                  </div>
+                </div>
+                <div id="recentScores" class="history-list"></div>
+              </article>
+
+              <article class="glass-panel bookmark-panel stack-lg">
+                <div class="card-header compact">
+                  <div>
+                    <p class="eyebrow">Bookmarks</p>
+                    <h3>Saved for Deep Practice</h3>
+                  </div>
                 </div>
                 <div id="bookmarksList" class="bookmark-list"></div>
                 <button id="practiceBookmarksButton" class="secondary-button full-width" type="button">
@@ -136,98 +214,15 @@
                 </button>
               </article>
 
-              <article class="glass-panel">
+              <article class="glass-panel leaderboard-panel stack-lg">
                 <div class="card-header compact">
-                  <p class="eyebrow">Leaderboard</p>
-                  <h3>Top 10 Players</h3>
+                  <div>
+                    <p class="eyebrow">Leaderboard</p>
+                    <h3>Top 10 Players</h3>
+                  </div>
+                  <span class="tag">Ranked</span>
                 </div>
                 <div id="dashboardLeaderboard" class="leaderboard-list"></div>
-              </article>
-            </aside>
-
-            <section class="content-column stack-lg">
-              <article class="glass-panel welcome-banner">
-                <div>
-                  <p class="eyebrow">Command Center</p>
-                  <h2>Build your next challenge.</h2>
-                  <p>
-                    Combine categories, set difficulty, search the bank, and launch a quiz
-                    session that matches exactly what you want to practice.
-                  </p>
-                </div>
-                <div class="banner-stats">
-                  <div>
-                    <span>Loaded Questions</span>
-                    <strong id="loadedQuestionCount">0</strong>
-                  </div>
-                  <div>
-                    <span>Matching Filters</span>
-                    <strong id="matchingQuestionCount">0</strong>
-                  </div>
-                </div>
-              </article>
-
-              <div class="setup-grid">
-                <article class="glass-panel stack-lg">
-                  <div class="card-header compact">
-                    <p class="eyebrow">Quiz Setup</p>
-                    <h3>Session Filters</h3>
-                  </div>
-
-                  <div class="stack-md">
-                    <div>
-                      <label class="section-label">Categories</label>
-                      <div id="categoryFilters" class="chip-grid"></div>
-                    </div>
-
-                    <div>
-                      <label class="section-label">Difficulty Levels</label>
-                      <div id="difficultyFilters" class="chip-grid"></div>
-                    </div>
-
-                    <div class="form-grid">
-                      <label class="field">
-                        <span>Questions Per Quiz</span>
-                        <select id="questionCountSelect">
-                          <option value="5">5 Questions</option>
-                          <option value="10" selected>10 Questions</option>
-                          <option value="15">15 Questions</option>
-                        </select>
-                      </label>
-
-                      <label class="field">
-                        <span>Search Questions</span>
-                        <input
-                          id="questionSearchInput"
-                          type="search"
-                          placeholder="Search by keyword, topic, or concept"
-                        />
-                      </label>
-                    </div>
-
-                    <div class="info-row">
-                      <span class="info-chip" id="poolSummary">Ready to build a quiz.</span>
-                    </div>
-                  </div>
-
-                  <button id="startQuizButton" class="primary-button" type="button">Start Quiz</button>
-                </article>
-
-                <article class="glass-panel stack-lg">
-                  <div class="card-header compact">
-                    <p class="eyebrow">Question Explorer</p>
-                    <h3>Preview Matching Questions</h3>
-                  </div>
-                  <div id="searchResultsPreview" class="search-preview-list"></div>
-                </article>
-              </div>
-
-              <article class="glass-panel">
-                <div class="card-header compact">
-                  <p class="eyebrow">Recent Scores</p>
-                  <h3>Previous Attempts</h3>
-                </div>
-                <div id="recentScores" class="history-list"></div>
               </article>
             </section>
           </div>

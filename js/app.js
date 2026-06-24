@@ -32,25 +32,28 @@ const state = {
 
 // Centralized DOM references keep the rest of the file focused on app behavior.
 const elements = {
-  authSection: document.querySelector("#authSection"),
   dashboardSection: document.querySelector("#dashboardSection"),
   quizSection: document.querySelector("#quizSection"),
   resultsSection: document.querySelector("#resultsSection"),
   userBadge: document.querySelector("#userBadge"),
   activeUsername: document.querySelector("#activeUsername"),
-  loginForm: document.querySelector("#loginForm"),
-  usernameInput: document.querySelector("#usernameInput"),
   logoutButton: document.querySelector("#logoutButton"),
   themeToggle: document.querySelector("#themeToggle"),
   themeToggleLabel: document.querySelector("#themeToggleLabel"),
+  dashboardWelcome: document.querySelector("#dashboardWelcome"),
   profileName: document.querySelector("#profileName"),
   profileQuizCount: document.querySelector("#profileQuizCount"),
   profileBestScore: document.querySelector("#profileBestScore"),
   profileAverageAccuracy: document.querySelector("#profileAverageAccuracy"),
   profileBookmarkCount: document.querySelector("#profileBookmarkCount"),
+  profileLevel: document.querySelector("#profileLevel"),
+  profileLastRating: document.querySelector("#profileLastRating"),
+  profileStreak: document.querySelector("#profileStreak"),
+  performanceSummary: document.querySelector("#performanceSummary"),
+  favoriteTrack: document.querySelector("#favoriteTrack"),
+  readinessBadge: document.querySelector("#readinessBadge"),
   bookmarksList: document.querySelector("#bookmarksList"),
   practiceBookmarksButton: document.querySelector("#practiceBookmarksButton"),
-  publicLeaderboard: document.querySelector("#publicLeaderboard"),
   dashboardLeaderboard: document.querySelector("#dashboardLeaderboard"),
   recentScores: document.querySelector("#recentScores"),
   loadedQuestionCount: document.querySelector("#loadedQuestionCount"),
@@ -105,8 +108,15 @@ const elements = {
 document.addEventListener("DOMContentLoaded", initializeApp);
 
 async function initializeApp() {
-  bindEvents();
   restoreTheme();
+  const hasSession = restoreSession();
+
+  if (!hasSession) {
+    redirectToLogin();
+    return;
+  }
+
+  bindEvents();
 
   try {
     state.questions = await loadQuestions();
@@ -118,12 +128,10 @@ async function initializeApp() {
     showToast("Could not load the question bank. Serve the project from a local web server and try again.");
   }
 
-  restoreSession();
   renderLeaderboard();
 }
 
 function bindEvents() {
-  elements.loginForm.addEventListener("submit", handleLogin);
   elements.logoutButton.addEventListener("click", handleLogout);
   elements.themeToggle.addEventListener("click", toggleTheme);
   elements.startQuizButton.addEventListener("click", () => startQuiz());
@@ -188,48 +196,20 @@ function renderFilterGroup(container, values, filterType) {
     .join("");
 }
 
-function handleLogin(event) {
-  event.preventDefault();
-
-  const username = elements.usernameInput.value.trim().replace(/\s+/g, " ");
-
-  if (!username) {
-    showToast("Please enter a username to continue.");
-    return;
-  }
-
-  const profiles = getProfiles();
-  const profile = normalizeProfile(profiles[username] || createProfile(username));
-
-  profiles[username] = profile;
-  saveProfiles(profiles);
-  localStorage.setItem(STORAGE_KEYS.currentUser, username);
-  state.profile = profile;
-
-  renderProfile();
-  renderLeaderboard();
-  showDashboard();
-  elements.usernameInput.value = "";
-  showToast(`Welcome, ${username}. Your dashboard is ready.`);
-}
-
 function handleLogout() {
   localStorage.removeItem(STORAGE_KEYS.currentUser);
   state.profile = null;
   state.currentQuiz = null;
   state.lastResult = null;
   clearQuizTimer();
-  updateUserBadge();
-  showView("auth");
-  renderLeaderboard();
+  redirectToLogin();
 }
 
 function restoreSession() {
   const username = localStorage.getItem(STORAGE_KEYS.currentUser);
 
   if (!username) {
-    showView("auth");
-    return;
+    return false;
   }
 
   const profiles = getProfiles();
@@ -237,13 +217,13 @@ function restoreSession() {
 
   if (!profile) {
     localStorage.removeItem(STORAGE_KEYS.currentUser);
-    showView("auth");
-    return;
+    return false;
   }
 
   state.profile = profile;
   renderProfile();
   showDashboard();
+  return true;
 }
 
 function createProfile(username) {
@@ -268,10 +248,18 @@ function renderProfile() {
   }
 
   const scores = state.profile.scores || [];
+  const latestAttempt = [...scores].sort((left, right) => new Date(right.timestamp) - new Date(left.timestamp))[0];
   const bestScore = scores.reduce((max, entry) => Math.max(max, entry.score), 0);
   const averageAccuracy = scores.length
     ? Math.round(scores.reduce((sum, entry) => sum + entry.accuracy, 0) / scores.length)
     : 0;
+  const favoriteTrack = getFavoriteTrack(scores);
+  const currentLevel = getPlayerLevel(scores.length, bestScore, averageAccuracy);
+  const lastRating = latestAttempt?.rating || "Unranked";
+  const practiceStreak = calculatePracticeStreak(scores);
+  const readiness = state.profile.bookmarks.length
+    ? `You have ${state.profile.bookmarks.length} bookmarked question${state.profile.bookmarks.length === 1 ? "" : "s"} ready for revision.`
+    : "Fresh slate. Build a focused quiz and start climbing the leaderboard.";
 
   elements.profileName.textContent = state.profile.username;
   elements.activeUsername.textContent = state.profile.username;
@@ -279,6 +267,18 @@ function renderProfile() {
   elements.profileBestScore.textContent = `${bestScore}`;
   elements.profileAverageAccuracy.textContent = `${averageAccuracy}%`;
   elements.profileBookmarkCount.textContent = `${state.profile.bookmarks.length}`;
+  setTextIfPresent(elements.dashboardWelcome, state.profile.username);
+  setTextIfPresent(elements.profileLevel, currentLevel);
+  setTextIfPresent(elements.profileLastRating, lastRating);
+  setTextIfPresent(elements.profileStreak, `${practiceStreak} day${practiceStreak === 1 ? "" : "s"}`);
+  setTextIfPresent(
+    elements.performanceSummary,
+    scores.length
+      ? `${averageAccuracy}% average accuracy across ${scores.length} quiz${scores.length === 1 ? "" : "zes"} with a best score of ${bestScore}.`
+      : "No quiz attempts yet. Start with a mixed session to generate your first performance snapshot.",
+  );
+  setTextIfPresent(elements.favoriteTrack, favoriteTrack);
+  setTextIfPresent(elements.readinessBadge, readiness);
 
   renderRecentScores();
   renderBookmarks();
@@ -393,7 +393,7 @@ function getCheckedFilterValues(filterType) {
 function startQuiz(customPool = null, mode = "standard", customTitle = "") {
   if (!state.profile) {
     showToast("Please log in before starting a quiz.");
-    showView("auth");
+    redirectToLogin();
     return;
   }
 
@@ -1093,7 +1093,6 @@ function renderLeaderboard() {
         .join("")
     : `<div class="empty-state">Complete a quiz to populate the leaderboard.</div>`;
 
-  elements.publicLeaderboard.innerHTML = markup;
   elements.dashboardLeaderboard.innerHTML = markup;
 }
 
@@ -1104,7 +1103,6 @@ function showDashboard() {
 }
 
 function showView(viewName) {
-  elements.authSection.classList.toggle("hidden", viewName !== "auth");
   elements.dashboardSection.classList.toggle("hidden", viewName !== "dashboard");
   elements.quizSection.classList.toggle("hidden", viewName !== "quiz");
   elements.resultsSection.classList.toggle("hidden", viewName !== "results");
@@ -1308,6 +1306,71 @@ function formatLongDate(timestamp) {
     month: "long",
     day: "numeric",
   });
+}
+
+function getFavoriteTrack(scores) {
+  const categoryCounts = {};
+
+  scores.forEach((score) => {
+    (score.answers || []).forEach((answer) => {
+      categoryCounts[answer.category] = (categoryCounts[answer.category] || 0) + 1;
+    });
+  });
+
+  const sortedCategories = Object.entries(categoryCounts).sort((left, right) => right[1] - left[1]);
+  return sortedCategories.length ? sortedCategories[0][0] : "Mixed Topics";
+}
+
+function getPlayerLevel(quizCount, bestScore, averageAccuracy) {
+  if (quizCount >= 12 || bestScore >= 120 || averageAccuracy >= 85) {
+    return "Elite";
+  }
+
+  if (quizCount >= 6 || bestScore >= 80 || averageAccuracy >= 65) {
+    return "Advanced";
+  }
+
+  if (quizCount >= 2 || bestScore >= 40 || averageAccuracy >= 45) {
+    return "Skilled";
+  }
+
+  return "Rookie";
+}
+
+function calculatePracticeStreak(scores) {
+  const uniqueDates = [...new Set(scores.map((score) => new Date(score.timestamp).toISOString().slice(0, 10)))]
+    .sort()
+    .reverse();
+
+  if (!uniqueDates.length) {
+    return 0;
+  }
+
+  let streak = 1;
+
+  for (let index = 1; index < uniqueDates.length; index += 1) {
+    const previousDate = new Date(uniqueDates[index - 1]);
+    const currentDate = new Date(uniqueDates[index]);
+    const differenceInDays = Math.round((previousDate - currentDate) / 86400000);
+
+    if (differenceInDays === 1) {
+      streak += 1;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+
+function setTextIfPresent(element, value) {
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+function redirectToLogin() {
+  window.location.href = "./login.html";
 }
 
 function showToast(message) {
