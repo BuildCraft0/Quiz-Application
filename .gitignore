@@ -13,6 +13,9 @@ Thumbs.db
 .env
 .env.*
 
+# Vercel local files
+.vercel/
+
 # Dependency and build output
 node_modules/
 dist/

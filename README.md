@@ -29,16 +29,19 @@ certificate generation.
 |-- index.html
 |-- login.html
 |-- README.md
-|-- serve.ps1
-|-- serve.bat
+|-- vercel.json
 |-- assets/
-|   `-- questions.json
+|   `-- data/
+|       `-- questions.json
 |-- css/
 |   `-- style.css
 `-- js/
     |-- app.js
     |-- login.js
     `-- questions.js
+`-- scripts/
+    |-- serve.ps1
+    `-- serve.bat
 ```
 
 ## How To Run
@@ -47,13 +50,13 @@ certificate generation.
 
 ```powershell
 cd "D:\github\project 1"
-.\serve.ps1
+.\scripts\serve.ps1
 ```
 
 ### Option 2: Batch file
 
 ```powershell
-serve.bat
+.\scripts\serve.bat
 ```
 
 ### Option 3: Manual Python server
@@ -98,7 +101,7 @@ This project uses browser `localStorage` for:
 ## Notes
 
 - Do not open the project using `file://`
-- Use a local server so `assets/questions.json` can load correctly
+- Use a local server so `assets/data/questions.json` can load correctly
 - Internet may be needed for CDN-loaded libraries such as Chart.js and jsPDF
 
 ## Tech Stack
