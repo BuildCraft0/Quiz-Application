@@ -1142,20 +1142,25 @@ function renderLeaderboard() {
         .map(
           (entry, index) => `
             <article class="leaderboard-item">
-              <div class="rank-badge">${index + 1}</div>
-              <div class="leaderboard-main">
-                <div class="leaderboard-top">
-                  <strong>${escapeHtml(entry.username)}</strong>
-                  <span class="score-pill">${entry.score} pts</span>
+              <div class="leaderboard-entry-top">
+                <div class="rank-badge">${index + 1}</div>
+                <div class="leaderboard-main">
+                  <div class="leaderboard-top">
+                    <strong class="leaderboard-name">${escapeHtml(entry.username)}</strong>
+                  </div>
+                  <div class="leaderboard-meta">
+                    <span>${entry.accuracy}% accuracy</span>
+                    <span>${formatDuration(entry.timeTakenMs)}</span>
+                  </div>
                 </div>
-                <div class="leaderboard-meta">
-                  <span>${entry.accuracy}% accuracy</span>
-                  <span>${formatDuration(entry.timeTakenMs)}</span>
-                </div>
+                <span class="score-pill">${entry.score} pts</span>
               </div>
-              <div class="leaderboard-track">
-                <span class="track-label">Track</span>
-                <strong>${escapeHtml(entry.categoriesLabel || "Mixed")}</strong>
+              <div class="leaderboard-entry-bottom">
+                <div class="leaderboard-track" title="${escapeAttribute(entry.categoriesLabel || "Mixed")}">
+                  <span class="track-label">Track</span>
+                  <strong>${escapeHtml(formatCompactTrackLabel(entry.categoriesLabel || "Mixed"))}</strong>
+                </div>
+                <span class="leaderboard-rank-note">Ranked by score, then speed.</span>
               </div>
             </article>
           `,
@@ -1388,6 +1393,19 @@ function formatLongDate(timestamp) {
     month: "long",
     day: "numeric",
   });
+}
+
+function formatCompactTrackLabel(label) {
+  const parts = String(label)
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (parts.length <= 2) {
+    return parts.join(" / ") || "Mixed";
+  }
+
+  return `${parts.slice(0, 2).join(" / ")} +${parts.length - 2} more`;
 }
 
 function getFavoriteTrack(scores) {

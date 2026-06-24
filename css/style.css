@@ -554,9 +554,7 @@ body.theme-light .lifeline-button {
 
 .leaderboard-item {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) minmax(150px, 210px);
-  gap: 12px;
-  align-items: center;
+  gap: 14px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -593,9 +591,29 @@ body.theme-light .leaderboard-item {
   min-width: 0;
 }
 
+.leaderboard-entry-top,
+.leaderboard-entry-bottom {
+  display: grid;
+  gap: 12px;
+}
+
+.leaderboard-entry-top {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.leaderboard-entry-bottom {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.leaderboard-name {
+  display: block;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .leaderboard-track {
-  justify-self: stretch;
-  align-self: stretch;
   padding: 12px 14px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.05);
@@ -622,6 +640,14 @@ body.theme-light .leaderboard-track {
   display: block;
   font-size: 0.96rem;
   line-height: 1.45;
+}
+
+.leaderboard-rank-note {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  align-self: center;
+  text-align: right;
 }
 
 .panel-summary-strip {
@@ -1378,6 +1404,18 @@ body.theme-light .mini-summary {
 .bookmark-panel,
 .leaderboard-panel {
   grid-column: span 4;
+}
+
+.activity-panel {
+  grid-column: span 3;
+}
+
+.bookmark-panel {
+  grid-column: span 3;
+}
+
+.leaderboard-panel {
+  grid-column: span 6;
 }
 
 .summary-ribbon {
@@ -2410,6 +2448,17 @@ body.theme-dark .leaderboard-landing .leaderboard-item {
 
   .hero-visual-zone {
     gap: 18px;
+  }
+
+  .leaderboard-entry-top,
+  .leaderboard-entry-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .score-pill,
+  .leaderboard-rank-note {
+    justify-self: start;
+    text-align: left;
   }
 }
 
