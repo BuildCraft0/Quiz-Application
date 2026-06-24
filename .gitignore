@@ -1,0 +1,22 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Dependency and build output
+node_modules/
+dist/
+coverage/
+
+# Local test/browser artifacts
+.chrome-profile/
