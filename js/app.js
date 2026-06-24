@@ -123,6 +123,7 @@ async function initializeApp() {
     elements.loadedQuestionCount.textContent = `${state.questions.length}`;
     renderFilterGroups();
     updateQuestionExplorer();
+    renderProfile();
   } catch (error) {
     console.error(error);
     showToast("Could not load the question bank. Serve the project from a local web server and try again.");
