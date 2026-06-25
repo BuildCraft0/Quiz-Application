@@ -25,24 +25,39 @@ certificate generation.
 ## Project Structure
 
 ```text
-/
+project 1/
+|-- .gitignore
 |-- index.html
 |-- login.html
 |-- README.md
 |-- vercel.json
-|-- src/
-|   |-- data/
-|   |   `-- questions.json
-|   |-- scripts/
-|   |   |-- app.js
-|   |   |-- login.js
-|   |   `-- questions.js
-|   `-- styles/
-|       `-- style.css
-`-- scripts/
-    |-- serve.ps1
-    `-- serve.bat
+|-- scripts/
+|   |-- serve.bat
+|   `-- serve.ps1
+`-- src/
+    |-- data/
+    |   `-- questions.json
+    |-- scripts/
+    |   |-- app.js
+    |   |-- login.js
+    |   `-- questions.js
+    `-- styles/
+        `-- style.css
 ```
+
+### Structure Overview
+
+- `login.html` - public front page and username login flow
+- `index.html` - main quiz dashboard and results workspace
+- `src/data/questions.json` - question bank used by the quiz engine
+- `src/scripts/app.js` - quiz engine, dashboard logic, leaderboard, analytics, certificate flow
+- `src/scripts/login.js` - landing page interactions and login handling
+- `src/scripts/questions.js` - question loading, filtering, shuffling, and session preparation helpers
+- `src/styles/style.css` - full UI styling for landing page and quiz dashboard
+- `scripts/serve.ps1` - PowerShell local server runner
+- `scripts/serve.bat` - batch file local server runner
+- `vercel.json` - Vercel deployment configuration
+- `.gitignore` - Git ignore rules for local-only files
 
 ## How To Run
 
