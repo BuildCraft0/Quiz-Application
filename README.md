@@ -93,6 +93,36 @@ You can also open the dashboard directly:
 http://127.0.0.1:8090/index.html
 ```
 
+## Deployment
+
+### Vercel (Recommended)
+
+This project already includes a `vercel.json` file that rewrites `/` to `login.html`.
+
+1. Push the project to a GitHub, GitLab, or Bitbucket repository
+2. Sign in to Vercel and click `Add New -> Project`
+3. Import the repository
+4. Keep the project root as the repository root
+5. Deploy the project as a static site without adding a custom build command
+6. After deployment, open the Vercel URL and the landing page will load from `login.html`
+
+### Deploy Using Vercel CLI
+
+```powershell
+npm i -g vercel
+vercel
+vercel --prod
+```
+
+### Deploy On Any Static Hosting
+
+You can also deploy this project on Netlify, GitHub Pages, or any static hosting provider.
+
+- Upload the full project with the same folder structure
+- Make sure `login.html`, `index.html`, `src/`, and `scripts/` are included
+- Set the default entry page to `login.html` if your hosting platform supports it
+- Do not deploy the app as a `file://` based archive because `questions.json` must load over HTTP
+
 ## Usage Flow
 
 1. Open `login.html`
